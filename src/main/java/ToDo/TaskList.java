@@ -1,5 +1,6 @@
 package ToDo;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -22,35 +23,17 @@ public class TaskList
 	}
 
 
-	public void createTask() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Please enter task name");
-		String name = sc.nextLine();
-		System.out.println("Please enter employee name");
-		String empname = sc.nextLine();
-		System.out.println("Please enter due date");
-		System.out.println("Please enter your date in the format dd/MM/yyyy");
-		@SuppressWarnings("resource")
-		Scanner scanner = new Scanner(System.in);
-		Date d = null;
-		try {
-			d = new SimpleDateFormat("dd/MM/yyyy").parse(scanner.nextLine());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+	public void createTask(String title, String employee, Date date)
+	{
+		Task t = new Task(); //todo have another constructor and use it insead of the next three lines
+		t.setName(title);
+		t.setDueDate(date); //todo fix this
+		t.setEmployee(employee);
 
-		Task t = new Task();
-		t.setName(name);
-		t.setDueDate(d);
-		t.setEmployee(empname);
 		list.add(t);
 		System.out.println("Task added successfully.");
 
 	}
-
-
-
-
 
 
 	private Task getTaskData()
@@ -94,10 +77,36 @@ public class TaskList
 	}
 
 
+	public static ArrayList<Task> concatenateList(List<TaskList> bigList)
+	{
+		ArrayList<Task> result = new ArrayList<>();
+
+		for (TaskList oneTaskListOfConcatenatingList: bigList)
+			result.addAll(oneTaskListOfConcatenatingList.getList());
+
+		return result;
+	}
+
+	public List<Task> getList()
+	{
+		return list;
+	}
 
 
 
 
+	//todo have a sort method that sort the list here
+	public  List<Task> sortByDate()
+	{
+		return sortByDate(list);
+	}
+
+
+	public static List<Task> sortByDate(List<Task> toBesortedList)
+	{
+		//Collections.sort(toBesortedList );
+		return toBesortedList;
+	}
 
 
 
