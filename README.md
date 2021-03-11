@@ -5,7 +5,7 @@ In this ToDoList project you can be able to add, select,create,& assign due date
 This project can be run via IntelliJ
 
 ### Run with IntelliJ
-First run the Main.java
+First run the Main.java 
 ...bash
  In the console, will get the output of the program like this
 
