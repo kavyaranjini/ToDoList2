@@ -34,8 +34,8 @@ public class Task {
 		this.employee = empname;
 	}
 	
-
-	public String geTaskDetails() {
+	@Override
+	public String toString() {
 		return "Task name = " + name + " , employee = " + employee + " , deadline = " + deadLine + ", Done = " + isDone;
 	}
 
