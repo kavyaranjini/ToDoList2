@@ -18,10 +18,7 @@ First run the Main.java
 
 7. Quit
    
-![example1](screenshots/example1.png)
-![example1](screenshots/example2.png)
-![example1](screenshots/example3.png)
-![example1](screenshots/example4.png)
+
    
 ...This is how the program runs 
 
