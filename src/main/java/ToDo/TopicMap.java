@@ -8,15 +8,13 @@ public class TopicMapWithList {
     private Map<String, TaskList> map = new HashMap();
 
 
-    private void displayToDoList()
+    public void display()
     {
-
         Set<String> topicList = map.keySet();
-
         for (String topic : topicList) {
-            System.out.println("=========================" + topic + "========================");
+            System.out.println("====*******====="+ topic + "=====**************=====");
             System.out.println(map.get(topic));
-            System.out.println("--------------------");
+            System.out.println("=====********========="+"=======***********=========");
         }
 
     }
@@ -25,8 +23,6 @@ public class TopicMapWithList {
     {
         return map.get(topic);
     }
-
-
 
     public void addTopic(String topic)
     {
@@ -73,7 +69,6 @@ public class TopicMapWithList {
 
         // concatenate the list to one list
         ArrayList<Task> result = TaskList.concatenateList(listInit);
-
 
 
         return result;
