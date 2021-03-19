@@ -2,6 +2,10 @@ package ToDo;
 
 import java.util.Date;
 
+/**
+ * This class is all about the task
+ * like setName,setDue date ,boolean
+ */
 public class Task {
 
 	private String name;
@@ -9,35 +13,22 @@ public class Task {
 	private String employee;
 	private boolean isDone;
 
-	public String getName() {
+	public Task()
+	{
+	}
+
+	public String getName(String e1) {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
- 
 
-	public boolean isDone() {
-		return isDone;
-	}
-
-	public void setDone(boolean isDone) {
-		this.isDone = isDone;
-	}
-
-	public void setDueDate(Date d) {
-		this.deadLine = d;
-	}
-
-	public void setEmployee(String empname) {
-		this.employee = empname;
-	}
-	
 	@Override
 	public String toString() {
-		return "Task name = " + name + " , employee = " + employee + " , deadline = " + deadLine + ", Done = " + isDone;
+		return "Task name = " + name + " , Student name = " + employee + " , deadline = " + deadLine + ", Done = " + isDone;
 	}
 
-}
+  }
 
