@@ -4,37 +4,40 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.Set;
 
 public class UserInterface
 {
     private Scanner scanner = new Scanner(System.in);
-    private TopicMapWithList map = new TopicMapWithList();
+    private TopicMap map = new TopicMap();
 
+    /**
+     *In this method user can add a subject after that he can choose topic.
+     */
 
     public void run()
     {
-        boolean quit = false; // todo count done and undone elments
+        boolean quit = false; // todo count done and undone elements
         String mainMenu = "" +
                 "1. Add a topic\n" +
-                "2. Handling a specific Topic List \n" +  // add and edit and display by specific topic
-                "3. Display\n\n" +  // diplay all topics, display by date for all task
+                "2. Choose a Topic from the List \n" +
+                "3. Display\n\n" +
                 "4. Quit\n\n";
         while (!quit)
         {
-
             System.out.println(mainMenu);
-            int choice = validateInt(1, 7);  // todo
+            int choice = validateInt(1, 4);  // todo
 
             switch (choice) {
                 case 1:
-                    String topic = userInput("Please enter topic name"); //done
+                    String topic = userInput("Please enter the topic name");
                     map.addTopic(topic);
                     break;
                 case 2:
-                    handleSpecigicTopicList();
+                    chooseSpecificTopicList();
                     break;
                 case 3:
-                    display();  //done
+                    map.displayTheEnterData();
                     break;
                 case 4:
                     quit = true;
@@ -48,114 +51,77 @@ public class UserInterface
 
     }
 
-    private void display()
+    /**In this method user can choose from the following list.
+     *The user can add new task or he can edit the task
+     */
+    public void chooseSpecificTopicList()
     {
-
-        int choice = 1; // userInput and scanner
-       // "3. Display\n\n" +  // diplay all topics, display by date for all task
-        switch (choice)
-        {
-            case 1 :
-                System.out.println(map.printTopics());
-                break;
-            case 2:
-                map.convertMapToOneList();
-                //sort //
-                // print result
-                System.out.println();
-        }
-
-    }
-
-
-    public void handleSpecigicTopicList()
-    {
-
         String topic = chooseTopic();
         TaskList topicList = map.getTopicListFromMap(topic);
         if(topicList == null)
             return;
 
-
-        // else
+        //else
         String mainMenu = "topic: " + topic + ": \n" +
                 "1. Add a new Task\n" +
-                "2. show all tasks in this topic \n" +
+                "2. show the added topic \n" +
                 "3. Edit a task (mark as Done, or update title, ...)\n" +
-                "4. remove task \n" +
-                "5. return to the main menu\n\n";
+                "4. Return to the main menu\n\n";
 
         System.out.println(mainMenu);
-        int choice = validateInt(1, 5);  // todo
+        int choice = validateInt(1, 4);  // todo
 
         switch (choice) {
             case 1:
                 addNewTask(topicList);
                 break;
             case 2:
-                showAllTask(topicList); //you may need scanner just o decide what type of chossing
+                showAllTask(topicList);
                 break;
             case 3:
                 editTask(topicList);
-                break;
-            case 4:
-                removeTask(topicList);
-                break;
-            default:
-                System.out.println("you endfgdh");
-                break;
 
-
+                default:
+                System.out.println("End, You can start again");
+                break;
         }
-
-
     }
 
-    private void removeTask(TaskList topicList) {
-
-        /*
-        1. print the list to user (sout(topicList))
-        2. ask the user to choose an index
-        3. topicList.remove(index) // in the topicList class has:  public void remove(int index)
-         */
-
+    /**
+     *this method will show the task that what student can do.
+     * @param topicList
+     */
+    private void showAllTask(TaskList topicList) {
+        System.out.println("Select \n 1.coding \n 2.Reading");
+        if (topicList == null)
+            return;
     }
 
+    /**
+     * In this method user can edit the task like remove or update.
+     * @param topiclist
+     */
+    private void editTask(TaskList topiclist) {
+        if(topiclist == null)
+            return;
+        System.out.println(" Remove a task ");
+    }
 
-    private void showAllTask(TaskList taskList)
+    /**
+     * In this method the user can add a topic.
+     * after that the user can assign the topic to the student.
+     * and also the user can assign a due date also.
+     * validate method
+     * @param topicList
+     */
+    public void addNewTask(TaskList topicList)
     {
-        /*
-        1. ask the use if he just want to dispaly or sort by date, title, ....
-        2. switch {
-            case 1:
-                sout(taskList)
-            case 2:
-                 Array<Task> l = taskList.sortByDate()
-                 sout(l)
-             case 3:
-                    .....
-
-        }
-
-         */
-    }
-
-
-
-    private void editTask(TaskList taskList)
-    {
-        // may be have a switch that ask what he want to update exactly ...
-    }
-
-    private void addNewTask(TaskList topicList)
-    {
-        System.out.println("Please enter task name");
+        System.out.println("Please add a task from the added Subject");
         String title = scanner.nextLine();
-        System.out.println("Please enter employee name");
-        String employee = scanner.nextLine();
+        System.out.println("Please assign a Student to do the task");
+        String student = scanner.nextLine();
         System.out.println("Please enter due date");
 
-        // validate date method:
         System.out.println("Please enter your date in the format dd/MM/yyyy");
 
         Scanner scanner = new Scanner(System.in);
@@ -165,28 +131,25 @@ public class UserInterface
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        // until here..........
-
-        topicList.createTask(title, employee, date);
-
-
-
+        topicList.createTask(title, student, date);
     }
 
+    /**
+     * Here the user can select the topic by choosing the subject which is available.
+     * note:not the index
+     * @return
+     */
 
     public String chooseTopic()
     {
-
         System.out.println(map.printTopics());
-        System.out.println("Please select a topic (not the index)");
+        System.out.println("Please select the Subject (not the index)");
 
         return scanner.nextLine();
-
     }
 
-
     private  String userInput(String printStatement)
+
     {
         System.out.println(printStatement);
         return scanner.nextLine();
@@ -195,12 +158,6 @@ public class UserInterface
 
     public int validateInt(int min, int max)
     {
-        return Integer.parseInt(scanner.nextLine()); //todo extend this
+        return Integer.parseInt(scanner.nextLine());
     }
-
-
-
-
-
-
 }
