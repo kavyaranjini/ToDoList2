@@ -60,7 +60,10 @@ You can see from the below screenshot
 ###
 ![example5](screenshots/example5.png)
 
+
 ... Lastly, by selecting '4' (ie quit)  user will quit.
+
 
 ## Class Diagram
 ![Class Diagram](screenshots/Class%20Diagram.png)
+
